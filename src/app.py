@@ -11,10 +11,17 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # UPLOAD_FOLDER = "./static/uploads"
 UPLOAD_FOLDER = os.path.join("static","uploads")
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024
 db = SQLAlchemy(app)
 
 from models import Pics
+
+@app.errorhandler(413)
+def request_entity_too_large(error):
+    return ('File Too Large', 413)
+app.register_error_handler(413, request_entity_too_large)
 
 @app.route("/")
 def home():
@@ -29,7 +36,11 @@ def home():
 def upload():
     if request.method == 'POST':  
         f = request.files['file']  
+        if f is None:
+            return "Error: Provide a valid file"
         name=f.filename
+        if name.split(".")[1] not in ALLOWED_EXTENSIONS:
+            return "Error: Invalid File Extention"
         name=name.replace(" ","_")
         file_name=os.path.join(app.config['UPLOAD_FOLDER'], name)
         f.save(file_name) 
