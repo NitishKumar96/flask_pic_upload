@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+    postgres:
+        container_name: postgres
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: postgres_1
+            POSTGRES_USER: postgres
+            POSTGRES_DB: flask_db
+        volumes:
+            - ./database:/var/lib/postgresql/data
+        ports:
+            - 5433:5432
+
+    flask_app:
+        container_name: flask_app
+        restart: always
+        build: .
+        # command: python manage.py runserver -h 0.0.0.0 -p 5000
+        command: >
+            bash -c "
+            sleep 0
+            && python manage.py db upgrade head
+            && python manage.py runserver -h 0.0.0.0 -p 5000"
+        ports:
+            - "8080:5000"
+        volumes:
+            - ./src:/usr/src
+
+
+    # nginx:
+    #     container_name: nginx
+    #     restart: always
+    #     build:
+    #         dockerfile: Dockerfile
+    #         context: ./nginx
+    #     ports:
+    #         - "8090:80"
+    #     depends_on:
+    #         - flask_app
+

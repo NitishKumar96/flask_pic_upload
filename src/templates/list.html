@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>File Printer</title>
+
+<script type="text/javascript">
+
+    function redirect() {
+
+        var url = "/list";
+
+        window.location.replace(url)
+    }
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+<div>
+    <p>List of all links</p>
+
+    
+</div>
+<hr>
+{%for pic in pics %}
+<p>{{pic.id}}: <button class="btn btn-success" onclick=" window.open('/view/{{pic.id}}','_blank')"> {{pic.name}} </button></p>
+<br>
+{%endfor%}
+
+{% endblock %}

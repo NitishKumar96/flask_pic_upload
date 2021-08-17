@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Error</title>
+
+{% endblock %}
+
+{% block body %}
+
+<div style="margin:2%;">
+
+    {% if error :%}
+    <div class="error">
+        <h1>{{error["code"]}}</h1>
+        <hr>
+        <h2>{{error["type"]}}</h2>
+        <p>{{error["message"]}}</p>
+    </div>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

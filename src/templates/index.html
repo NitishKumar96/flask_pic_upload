@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>File Printer</title>
+
+<script type="text/javascript">
+
+    function redirect() {
+
+        var url = "/list";
+
+        window.location.replace(url)
+    }
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+<div>
+    <title>Upload new File</title>
+    <form style="margin: 4%;" action = "/upload" method = "post" enctype="multipart/form-data">
+    <h1>Upload new Picture </h1>
+      <p><input type=file name=file value="Select File">
+         <input type=submit value=Upload style="margin-left: 10%">
+    </form>
+    <input type="button" style="margin-left:4%;" onclick="redirect()" value="My Links" />
+</div>
+<hr>
+{% if link %}
+
+<button class="btn btn-success" onclick=" window.open('/view/{{link}}','_blank')"> {{name}} </button>
+
+{%endif%}
+{% endblock %}
