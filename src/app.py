@@ -69,7 +69,7 @@ def upload():
             db.session.commit()
             # return redirect("/view/" + str(pic.id), code=302)
             # return render_template("index.html",link=pic.id,name = name)
-            return request.url_root+"/view"+str(pic.id)
+            return request.url_root+"view/"+str(pic.id)
         except Exception as e:
     	    return(str(e))
 
