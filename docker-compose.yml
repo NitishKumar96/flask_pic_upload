@@ -26,19 +26,19 @@ services:
             && python manage.py db upgrade head
             && python manage.py runserver -h 0.0.0.0 -p 5000"
         ports:
-            - "80:5000"
+            - "8080:5000"
         volumes:
             - ./src:/usr/src
 
 
-    # nginx:
-    #     container_name: nginx
-    #     restart: always
-    #     build:
-    #         dockerfile: Dockerfile
-    #         context: ./nginx
-    #     ports:
-    #         - "8090:80"
-    #     depends_on:
-    #         - flask_app
+    nginx:
+        container_name: nginx
+        restart: always
+        build:
+            dockerfile: Dockerfile
+            context: ./nginx
+        ports:
+            - "80:80"
+        depends_on:
+            - flask_app
 
