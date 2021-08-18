@@ -11,7 +11,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # UPLOAD_FOLDER = "./static/uploads"
 UPLOAD_FOLDER = os.path.join("static","uploads")
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = ['png', 'jpeg']
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024 
 db = SQLAlchemy(app)
