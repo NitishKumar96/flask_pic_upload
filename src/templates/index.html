@@ -21,9 +21,9 @@
     <form style="margin: 4%;" action = "/upload" method = "post" enctype="multipart/form-data">
     <h1>Upload new Picture </h1>
       <p><input type=file name="Select File" value="Select File">
-         <input type=submit value=Upload style="margin-left: 10%">
+         <input type=submit name="Upload" value=Upload style="margin-left: 10%">
     </form>
-    <input type="button" style="margin-left:4%;" onclick="redirect()" value="My Links" />
+    <input type="button" name="My Links" style="margin-left:4%;" onclick="redirect()" value="My Links" />
 </div>
 <hr>
 {% if link %}
